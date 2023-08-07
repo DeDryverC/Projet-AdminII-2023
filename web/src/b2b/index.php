@@ -31,12 +31,12 @@
             $result= $conn->query("SELECT * FROM articles");
 
             while ($row = $result->fetch()) {
-                echo $row['nom'] . " - " . $row['prix'] . "€ <br />\n";
+                echo $row['name'] . " - " . $row['price'] . "€ <br />\n";
             }
 
             if (isset($_POST['submit'])){
-                $article = $_POST["article"];
-                $prix = $_POST["prix"];
+                $article = $_POST["name"];
+                $prix = $_POST["price"];
 
                 $insert = "INSERT INTO articles VALUES ('$article', $prix)";
                 $conn->exec($insert);
