@@ -17,7 +17,7 @@ services:
             - mysql
             
     mysql:
-        image: mysql:lastest
+        image: mysql:latest
         container_name: mysql
         volumes:
             - ./mysql/db:/var/lib/mysql
