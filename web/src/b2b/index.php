@@ -20,30 +20,36 @@
         <div>
             <h3>Articles en vente</h3>
             <?php
+	    define("DB_HOST", "mysql");
+	    define("DB_USERNAME", "admin");
+	    define("DB_PASSWORD", "admin123");
+	    define("DB_NAME", "woodytoys");
+	    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+	    
+	    if ($conn->connect_error){
+		 echo "An Error occured with the database, please contact the system administrator.";
+	   	    
+	    }
+	    echo "Connected successfully";
 
-            $servername = 'localhost:3306';
-            $username = 'admin';
-            $password = "admin123";
-            $dbname = 'woodytoys';
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname",$username,$password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $result= $conn->query("SELECT * FROM articles");
+            //$result= $conn->query("SELECT * FROM articles");
 
-            while ($row = $result->fetch()) {
-                echo $row['name'] . " - " . $row['price'] . "€ <br />\n";
-            }
+            //while ($row = $result->fetch()) {
+            //   echo $row['name'] . " - " . $row['price'] . "€ <br />\n";
+            //}
 
-            if (isset($_POST['submit'])){
-                $article = $_POST["name"];
-                $prix = $_POST["price"];
+            //if (isset($_POST['submit'])){
+            //    $article = $_POST["name"];
+            //    $prix = $_POST["price"];
 
-                $insert = "INSERT INTO articles VALUES ('$article', $prix)";
-                $conn->exec($insert);
-                echo "<meta http-equiv='refresh' content='0'>";
-            }
+            //    $insert = "INSERT INTO articles VALUES ('$article', $prix)";
+            //    $conn->exec($insert);
+            //    echo "<meta http-equiv='refresh' content='0'>";
+            //}
 
-            $conn = null;
+            //$conn = null;
             ?>
         </div>
     </body>

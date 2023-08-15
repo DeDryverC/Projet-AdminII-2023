@@ -7,6 +7,7 @@ services:
         volumes:
             - ./nginx/html:/var/www/html
             - ./web/src/portal:/var/www/portal/html
+            - ./web/src/b2b:/var/www/b2b/html
             - ./nginx/conf/b2b.conf:/etc/nginx/conf.d/b2b.conf
             - ./nginx/conf/core.conf:/etc/nginx/conf.d/core.conf
             - ./nginx/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf
@@ -15,10 +16,14 @@ services:
             - "80:80"
             - "443:443"
         depends_on:
+            - php
             - mysql
+        networks:
+          - internal
 
     mysql:
         image: mysql:oracle
+        hostname: mysql
         container_name: mysql
         restart: always
         volumes:
@@ -31,8 +36,22 @@ services:
             MYSQL_PASSWORD: admin123
         ports:
             - "3306:3306"
-
-    php-fpm:
-        image: php:8.3-rc-fpm
+        networks:
+          - internal
+    php:
+        build:
+          context: ./web/php
+        hostname: php
+        networks:
+          - internal
+        container_name: php
         volumes:
-            - ./web/src/b2b:/var/www/b2b/html
+          - ./web/src/b2b:/var/www/b2b/html  
+        restart: unless-stopped
+        working_dir: /var/www/b2b/html
+        expose:
+          - 9000
+
+networks:
+  internal:
+    driver: bridge
