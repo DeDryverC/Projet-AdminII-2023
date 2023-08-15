@@ -19,7 +19,7 @@
         </div>
         <div>
             <h3>Articles en vente</h3>
-            <?php
+        <?php
 	    define("DB_HOST", "mysql");
 	    define("DB_USERNAME", "admin");
 	    define("DB_PASSWORD", "admin123");
@@ -30,27 +30,24 @@
 		 echo "An Error occured with the database, please contact the system administrator.";
 	   	    
 	    }
-	    echo "Connected successfully";
+                
+        $id = 0;
+        if($result = mysqli_query($conn, "SELECT * FROM articles")) {
+            echo $row['name'] . " - " . $row['price'] . "€ <br />\n";
+            if($row["id"] > $id) {
+                $id = $row["id"];
+            }
+        }
 
-            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if (isset($_POST['submit'])){
+            $article = $_POST["name"];
+            $prix = $_POST["price"];
 
-            //$result= $conn->query("SELECT * FROM articles");
-
-            //while ($row = $result->fetch()) {
-            //   echo $row['name'] . " - " . $row['price'] . "€ <br />\n";
-            //}
-
-            //if (isset($_POST['submit'])){
-            //    $article = $_POST["name"];
-            //    $prix = $_POST["price"];
-
-            //    $insert = "INSERT INTO articles VALUES ('$article', $prix)";
-            //    $conn->exec($insert);
-            //    echo "<meta http-equiv='refresh' content='0'>";
-            //}
-
-            //$conn = null;
-            ?>
+            $insert = "INSERT INTO articles VALUES ('$article', $prix)";
+            $conn->exec($insert);
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
+        ?>
         </div>
     </body>
 </html>
