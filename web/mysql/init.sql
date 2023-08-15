@@ -1,10 +1,8 @@
-CREATE DATABASE `woodytoys`;
-
-CREATE TABLE `articles` (
+CREATE TABLE `woodytoys`.`articles` (
   `id` INT NOT NULL,
   `name` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `brand` VARCHAR(255) DEFAULT NULL,
-  `price` FLOAT DEFAULT NULL,
+  `price` FLOAT(0,0) DEFAULT NULL,
 );
 
 INSERT INTO `woodytoys`.`articles`
