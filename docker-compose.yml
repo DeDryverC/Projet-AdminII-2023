@@ -5,13 +5,15 @@ services:
         image: nginx:stable-perl
         container_name: nginxrp
         volumes:
+            - ./certbot/www:/var/certbot/:ro
+            - ./certbot/conf/:/etc/nginx/ssl/:ro
             - ./nginx/html:/var/www/html:ro
-            - ./web/src/portal:/var/www/portal/html:ro
-            - ./web/src/b2b:/var/www/b2b/html:ro
             - ./nginx/conf/b2b.conf:/etc/nginx/conf.d/b2b.conf:ro
             - ./nginx/conf/core.conf:/etc/nginx/conf.d/core.conf:ro
             - ./nginx/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
             - ./nginx/conf/portal.conf:/etc/nginx/conf.d/portal.conf:ro
+            - ./web/src/portal:/var/www/portal/html:ro
+            - ./web/src/b2b:/var/www/b2b/html:ro
         ports:
             - "80:80"
             - "443:443"

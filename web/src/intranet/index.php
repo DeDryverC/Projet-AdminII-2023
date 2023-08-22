@@ -1,10 +1,10 @@
 <html>
     <head>
         <meta charset = "UTF-8">
-        <title>WoodyToys revendeurs</title>
+        <title>Erp</title>
     </head>
     <body style="font-family: Calibri">
-        <h1> WoodyToys b2b</h1>
+        <h1> WoodyToys Intranet</h1>
         <br/>
         <a style="margin-left:25px;" href="https://woodytoys.seldric.be">Site vitrine</a><a style="margin-left:25px;" href="https://erp.seldric.be">Intranet</a>
         </br>
