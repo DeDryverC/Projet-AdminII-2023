@@ -5,30 +5,31 @@ services:
         image: nginx:stable-perl
         container_name: nginxrp
         volumes:
-            - ./nginx/html:/var/www/html
-            - ./web/src/portal:/var/www/portal/html
-            - ./web/src/b2b:/var/www/b2b/html
-            - ./nginx/conf/b2b.conf:/etc/nginx/conf.d/b2b.conf
-            - ./nginx/conf/core.conf:/etc/nginx/conf.d/core.conf
-            - ./nginx/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf
-            - ./nginx/conf/portal.conf:/etc/nginx/conf.d/portal.conf
+            - ./nginx/html:/var/www/html:ro
+            - ./web/src/portal:/var/www/portal/html:ro
+            - ./web/src/b2b:/var/www/b2b/html:ro
+            - ./nginx/conf/b2b.conf:/etc/nginx/conf.d/b2b.conf:ro
+            - ./nginx/conf/core.conf:/etc/nginx/conf.d/core.conf:ro
+            - ./nginx/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
+            - ./nginx/conf/portal.conf:/etc/nginx/conf.d/portal.conf:ro
         ports:
             - "80:80"
             - "443:443"
         depends_on:
             - php
             - mysql
+            - certbot
         networks:
           - internal
-
+        restart: always
     mysql:
         image: mysql:oracle
         hostname: mysql
         container_name: mysql
         restart: always
         volumes:
-            - ./web/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-            - ./web/mysql/conf.d:/etc/mysql/conf.d
+            - ./web/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+            - ./web/mysql/conf.d:/etc/mysql/conf.d:ro
         environment:
             MYSQL_ROOT_PASSWORD: root123
             MYSQL_DATABASE: woodytoys
@@ -46,11 +47,16 @@ services:
           - internal
         container_name: php
         volumes:
-          - ./web/src/b2b:/var/www/b2b/html  
+          - ./web/src/b2b:/var/www/b2b/html:ro
         restart: unless-stopped
         working_dir: /var/www/b2b/html
         expose:
           - 9000
+    certbot:
+        image: certbot/certbot:v2.6.0
+        volumes:
+          - ./certbot/www/:/var/www/certbot/:rw
+          - ./certbot/conf/:/etc/letsencrypt/:rw
 
 networks:
   internal:
