@@ -45,7 +45,7 @@
                 $id = 0;
 
                 $stmt = "SELECT * FROM articles";
-                $result = $conn->query($sql);
+                $result = $conn->query($stmt);
 
                 if ($result->num_rows > 0) {
                     printf('<tbody>');
