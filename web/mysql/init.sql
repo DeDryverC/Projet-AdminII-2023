@@ -4,14 +4,14 @@ CREATE TABLE `woodytoys`.`articles` (
   `brand` VARCHAR(255) DEFAULT NULL,
   `price` FLOAT DEFAULT NULL
 );
-CREATE TABLE `woodytoys`.`res_user` (
+CREATE TABLE `woodytoys`.`res_users` (
   `id` INT NOT NULL PRIMARY KEY,
   `login` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `firstname` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastname` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `access_accounting` BOOLEAN DEFAULT FALSE,
-  `access_contact` BOOLEAN DEFAULT FALSE,
+  `access_contact` BOOLEAN DEFAULT FALSE
 );
 CREATE TABLE `woodytoys`.`invoice` (
   `id` INT NOT NULL PRIMARY KEY,
@@ -27,14 +27,14 @@ CREATE TABLE `woodytoys`.`contact` (
   `company` BOOLEAN DEFAULT FALSE,
   `individual` BOOLEAN DEFAULT FALSE,
   `email` VARCHAR(255) NOT NULL,
-  `phone` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(255) NOT NULL
 );
 
 INSERT INTO `woodytoys`.`articles`
 (`id`, `name`, `brand`, `price`)
 VALUES
 (1, 'Tracteur', 'Playmebil', 50.00),(2, 'Voiture Police', 'Playmebil', 44.99),(3, 'Camion Pompier', 'Playmebil', 25.99),(4, 'Maison Fleuriste', 'Lago', 50.00),(5, 'Falcon Millenium', 'Lago', 249.99);
-INSERT INTO `woodytoys`.`user`
+INSERT INTO `woodytoys`.`res_users`
 (`id`,  `login`,  `password`, `firstname`, `lastname`, `access_accounting`,  `access_contact`)
 VALUES
 (1, 'johndoe@woodytoys.seldric.be', 'password123',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'password123', 'Cedric', 'De Dryver', TRUE, TRUE);
