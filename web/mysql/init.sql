@@ -4,7 +4,7 @@ CREATE TABLE `woodytoys`.`articles` (
   `brand` VARCHAR(255) DEFAULT NULL,
   `price` FLOAT DEFAULT NULL
 );
-CREATE TABLE `woodytoys`.`user` (
+CREATE TABLE `woodytoys`.`res_user` (
   `id` INT NOT NULL PRIMARY KEY,
   `login` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` VARCHAR(255) NOT NULL,
@@ -26,8 +26,8 @@ CREATE TABLE `woodytoys`.`contact` (
   `name` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `company` BOOLEAN DEFAULT FALSE,
   `individual` BOOLEAN DEFAULT FALSE,
-  `email` VARCHAR(255) BOOLEAN DEFAULT FALSE,
-  `phone` VARCHAR(255) BOOLEAN DEFAULT FALSE,
+  `email` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(255) NOT NULL,
 );
 
 INSERT INTO `woodytoys`.`articles`
@@ -37,7 +37,7 @@ VALUES
 INSERT INTO `woodytoys`.`user`
 (`id`,  `login`,  `password`, `firstname`, `lastname`, `access_accounting`,  `access_contact`)
 VALUES
-(1, 'johndoe@woodytoys.seldric.be', 'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'Cedric', 'De Dryver', TRUE, TRUE);
+(1, 'johndoe@woodytoys.seldric.be', 'password123',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'password123', 'Cedric', 'De Dryver', TRUE, TRUE);
 INSERT INTO `woodytoys`.`invoice`
 (`id`,  `name`,  `customer`, `date`, `amount`)
 VALUES
@@ -46,5 +46,6 @@ INSERT INTO `woodytoys`.`contact`
 (`id`,  `name`,  `company`, `individual`, `email`,  `phone`)
 VALUES
 (1, 'Customer One', FALSE, TRUE, 'customer1@abcompany.be', '04700000004'), (2, 'George Doe', FALSE, TRUE, 'g.doe@dfg.inc', '04704700004'), (3, 'ABC Company', TRUE, FALSE, 'contact@abcompany.be', '04700000004');
+
 CREATE USER admin_woodytoys IDENTIFIED WITH mysql_native_password BY 'password123';
 GRANT ALL PRIVILEGES ON woodytoys.articles TO 'admin_woodytoys';
