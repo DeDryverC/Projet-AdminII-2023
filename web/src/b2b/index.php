@@ -70,7 +70,7 @@
                     $brand = $_POST["brand"];
 
                     $insert = $mysqli->prepare("INSERT INTO articles VALUES (?, ?, ?, ?)");
-                    $insert->bind_param("si", $new_article_id, $article, $prix, $brand);
+                    $insert->bind_param("issd", $new_article_id, $article, $prix, $brand);
                     $insert->execute();
                     $insert->close();
                     echo "<meta http-equiv='refresh' content='0'>";

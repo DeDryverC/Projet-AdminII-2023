@@ -9,11 +9,13 @@ services:
             - ./certbot/conf/:/etc/nginx/ssl/:ro
             - ./nginx/html:/var/www/html:ro
             - ./nginx/conf/b2b.conf:/etc/nginx/conf.d/b2b.conf:ro
+            - ./nginx/conf/erp.conf:/etc/nginx/conf.d/erp.conf:ro
             - ./nginx/conf/core.conf:/etc/nginx/conf.d/core.conf:ro
             - ./nginx/conf/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
             - ./nginx/conf/portal.conf:/etc/nginx/conf.d/portal.conf:ro
             - ./web/src/portal:/var/www/portal/html:ro
             - ./web/src/b2b:/var/www/b2b/html:ro
+            - ./web/src/erp:/var/www/erp/html:ro
         ports:
             - "80:80"
             - "443:443"
@@ -50,6 +52,7 @@ services:
         container_name: php
         volumes:
           - ./web/src/b2b:/var/www/b2b/html:ro
+          - ./web/src/erp:/var/www/erp/html:ro
         restart: unless-stopped
         working_dir: /var/www/b2b/html
         expose:
