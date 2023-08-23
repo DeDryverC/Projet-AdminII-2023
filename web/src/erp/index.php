@@ -7,7 +7,7 @@
         <h1> WoodyToys Intranet</h1>
         <br/>
         <a style="margin-left:25px;" href="https://woodytoys.seldric.be">Site vitrine</a><a style="margin-left:25px;" href="https://b2b.seldric.be">Site vendeur</a>
-        </br>
+        </br><br/><br/>
         <div id="login_container">
             <form method="POST">
                 <label for="login">Identifiants </label>
@@ -40,14 +40,14 @@
                 if ($result->num_rows == 1) {
                     $row = $result->fetch_assoc();
                     $user_page = sprintf("<div><span> Hello <b>%s %s</b></span><hr/><span>email : <b>%s</b></span><br/><span>Accès Comptabilité : <b>%d</b></span><br/><span>Accès Contacts : <b>%d</b></div>", 
-                        $row["firsname"], 
+                        $row["firstname"], 
                         $row["lastname"], 
-                        $row["email"], 
+                        $row["login"], 
                         $row["access_accounting"],
                         $row["access_contact"]
                     );
                     
-                    $html = preg_replace('#<div id="login_container">(.*?)</div>', '', $user_page);
+                    $html = preg_replace('#<div id="login_container">(.*?)</div>#', '', $user_page);
                 } else {
                     printf('No user found.<br />');
                 }
