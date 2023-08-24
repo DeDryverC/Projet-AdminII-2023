@@ -4,7 +4,7 @@
     define("DB_PASSWORD", "admin123");
     define("DB_NAME", "woodytoys");
     $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    
+    $err = FALSE;
     if ($conn->connect_error){
         echo "An Error occured with the database, please contact the system administrator.";
         
@@ -24,10 +24,10 @@
                 header("Location: home.php?uuid=".$row["uuid"]);
                 exit();
             } else {
-                printf(" Mot de passe ou login incorrect. <br/> Veuillez contacter l'administrateur système si vous avez perdu votre mot de passe.");
+                $err = TRUE;
             }
         } else {
-            printf('No user found.<br />');
+            $err = TRUE;
         }
         $result->close();
         $access->close();
@@ -53,6 +53,14 @@
                 <input type="password" name="password" placeholder="Mot de passe..">
                 <input type="submit" name="submit" value="Connection">
             </form>
+        </div>
+        <br/>
+        <div>
+            <?php
+                if($err==TRUE){
+                    printf("Mot de passe ou login incorrect. <br/> Veuillez contacter l'administrateur système si vous avez perdu votre mot de passe.<br/>");
+                }
+            ?>
         </div>
     </body>
 </html>

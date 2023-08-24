@@ -5,4 +5,4 @@ login : johndoe@woodytoys.seldric.be
 password: w00DyT0ys
 
 login: cdd@woodytoys.seldric.be
-password: rip_skybl0gS
+password: rip_skybl0g
