@@ -15,7 +15,7 @@
         $password = $_POST["password"];
 
         $access = $conn->prepare("SELECT uuid, password FROM res_users WHERE login = ?");
-        $access->bind_param("ss",  $login);
+        $access->bind_param("s",  $login);
         $access->execute();
         $result = $access->get_result();
         if ($result->num_rows == 1) {
