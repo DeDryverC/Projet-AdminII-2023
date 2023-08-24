@@ -38,7 +38,7 @@ VALUES
 INSERT INTO `woodytoys`.`res_users`
 (`id`,  `login`, `uuid`,  `password`, `firstname`, `lastname`, `access_accounting`,  `access_contact`)
 VALUES
-(1, 'johndoe@woodytoys.seldric.be', 'a6519ed0-42ac-11ee-be56-0242ac120002', 'password123',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'c184c0d8-42ac-11ee-be56-0242ac120002', 'password123', 'Cedric', 'De Dryver', TRUE, TRUE);
+(1, 'johndoe@woodytoys.seldric.be', 'a6519ed0-42ac-11ee-be56-0242ac120002', '$2y$10$3vqYajsAXabY9xgNqs98fO043EDW4ZWQLLrS4hqm7DoGrOqkArgYm',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'c184c0d8-42ac-11ee-be56-0242ac120002', '$2y$10$Gc5XU.PUQfOo/P.Htq/bzufhTvhkWQ.1X1fcyfagrJRgkzsxH/WJa', 'Cedric', 'De Dryver', TRUE, TRUE);
 INSERT INTO `woodytoys`.`invoice`
 (`id`,  `name`,  `customer`, `date`, `amount`)
 VALUES

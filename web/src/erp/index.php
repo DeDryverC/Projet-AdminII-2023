@@ -14,14 +14,18 @@
         $login = $_POST["login"];
         $password = $_POST["password"];
 
-        $access = $conn->prepare("SELECT uuid FROM res_users WHERE login = ? and password = ?");
-        $access->bind_param("ss",  $login, $password);
+        $access = $conn->prepare("SELECT uuid, password FROM res_users WHERE login = ?");
+        $access->bind_param("ss",  $login);
         $access->execute();
         $result = $access->get_result();
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            header("Location: home.php?uuid=".$row["uuid"]);
-            exit();
+            if(password_verify($password, $row["password"])){
+                header("Location: home.php?uuid=".$row["uuid"]);
+                exit();
+            } else {
+                printf(" Mot de passe ou login incorrect. <br/> Veuillez contacter l'administrateur système si vous avez perdu votre mot de passe.");
+            }
         } else {
             printf('No user found.<br />');
         }
