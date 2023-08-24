@@ -15,8 +15,8 @@
         $log_access->bind_param("s",  $_GET["uuid"]);
         $log_access->execute();
         $log_result = $log_access->get_result();
-        $uuid_rows = $result->fetch_assoc();
-        if($result->num_rows != 1){
+        $uuid_rows = $log_result->fetch_assoc();
+        if($log_result->num_rows != 1){
             header("Location: index.php");
             exit();
         }
@@ -39,7 +39,7 @@
         <?php
             if(isset($_GET["uuid"])) {
                 $log_access = $conn->prepare("SELECT * FROM res_users where uuid = ?");
-                $log_access->bind_param("ss",  $_GET["uuid"]);
+                $log_access->bind_param("s",  $_GET["uuid"]);
                 $log_access->execute();
                 $log_result = $log_access->get_result();
                 $uuid_rows = $result->fetch_assoc();
