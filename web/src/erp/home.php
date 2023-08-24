@@ -15,7 +15,6 @@
         $log_access->bind_param("s",  $_GET["uuid"]);
         $log_access->execute();
         $log_result = $log_access->get_result();
-        $uuid_rows = $log_result->fetch_assoc();
         if($log_result->num_rows != 1){
             header("Location: index.php");
             exit();
@@ -25,6 +24,8 @@
         header("Location: index.php");
         exit();
     }
+    $log_result->close();
+    $log_access->close();
 ?>
 <html>
     <head>
@@ -38,13 +39,12 @@
         </br><br/><br/>
         <?php
             if(isset($_GET["uuid"])) {
-                $log_access = $conn->prepare("SELECT * FROM res_users where uuid = ?");
-                $log_access->bind_param("s",  $_GET["uuid"]);
-                $log_access->execute();
-                $log_result = $log_access->get_result();
-                $uuid_rows = $result->fetch_assoc();
-                if($result->num_rows == 1){
-                    $row = $result->fetch_assoc();
+                $info_access = $conn->prepare("SELECT * FROM res_users where uuid = ?");
+                $info_access->bind_param("s",  $_GET["uuid"]);
+                $info_access->execute();
+                $info_result = $info_access->get_result();
+                if($info_result->num_rows == 1){
+                    $row = $info_result->fetch_assoc();
                     printf("<div><span> Hello <b>%s %s</b></span><hr/><span>email : <b>%s</b></span><br/><span>Accès Comptabilité : <b>%d</b></span><br/><span>Accès Contacts : <b>%d</b></div>", 
                         $row["firstname"], 
                         $row["lastname"], 
@@ -56,8 +56,8 @@
                     printf('No user found. Please contact your administrator<br />');
                 }
             }
-            $result->close();
-            $access->close();
+            $info_result->close();
+            $info_access->close();
             $conn->close()
         ?>
         <div id="login_container">
