@@ -1,3 +1,36 @@
+<?php
+    define("DB_HOST", "mysql");
+    define("DB_USERNAME", "admin");
+    define("DB_PASSWORD", "admin123");
+    define("DB_NAME", "woodytoys");
+    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    
+    if ($conn->connect_error){
+        echo "An Error occured with the database, please contact the system administrator.";
+        
+    }
+            
+    if (isset($_POST['submit'])){
+        $login = $_POST["login"];
+        $password = $_POST["password"];
+
+        $access = $conn->prepare("SELECT uuid FROM res_users WHERE login = ? and password = ?");
+        $access->bind_param("ss",  $login, $password);
+        $access->execute();
+        $result = $access->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            header("Location: home.php?uuid=%s".$row["uuid"]);
+            exit();
+        } else {
+            printf('No user found.<br />');
+        }
+        $result->close();
+        $access->close();
+
+    }
+    $conn->close();
+?>
 <html>
     <head>
         <meta charset = "UTF-8">
@@ -17,45 +50,5 @@
                 <input type="submit" name="submit" value="Connection">
             </form>
         </div>
-        <?php
-            define("DB_HOST", "mysql");
-            define("DB_USERNAME", "admin");
-            define("DB_PASSWORD", "admin123");
-            define("DB_NAME", "woodytoys");
-            $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-            
-            if ($conn->connect_error){
-                echo "An Error occured with the database, please contact the system administrator.";
-                
-            }
-                    
-            if (isset($_POST['submit'])){
-                $login = $_POST["login"];
-                $password = $_POST["password"];
-
-                $access = $conn->prepare("SELECT * FROM res_users WHERE login = ? and password = ?");
-                $access->bind_param("ss",  $login, $password);
-                $access->execute();
-                $result = $access->get_result();
-                if ($result->num_rows == 1) {
-                    $row = $result->fetch_assoc();
-                    $user_page = sprintf("<div><span> Hello <b>%s %s</b></span><hr/><span>email : <b>%s</b></span><br/><span>Accès Comptabilité : <b>%d</b></span><br/><span>Accès Contacts : <b>%d</b></div>", 
-                        $row["firstname"], 
-                        $row["lastname"], 
-                        $row["login"], 
-                        $row["access_accounting"],
-                        $row["access_contact"]
-                    );
-                    
-                    $html = preg_replace('#<div id="login_container">(.*?)</div>#', '', $user_page);
-                } else {
-                    printf('No user found.<br />');
-                }
-                $result->close();
-                $access->close();
-    
-            }
-            $conn->close();
-        ?>
     </body>
 </html>

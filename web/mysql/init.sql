@@ -7,6 +7,7 @@ CREATE TABLE `woodytoys`.`articles` (
 CREATE TABLE `woodytoys`.`res_users` (
   `id` INT NOT NULL PRIMARY KEY,
   `login` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
+  `uuid` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `firstname` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastname` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -35,9 +36,9 @@ INSERT INTO `woodytoys`.`articles`
 VALUES
 (1, 'Tracteur', 'Playmebil', 50.00),(2, 'Voiture Police', 'Playmebil', 44.99),(3, 'Camion Pompier', 'Playmebil', 25.99),(4, 'Maison Fleuriste', 'Lago', 50.00),(5, 'Falcon Millenium', 'Lago', 249.99);
 INSERT INTO `woodytoys`.`res_users`
-(`id`,  `login`,  `password`, `firstname`, `lastname`, `access_accounting`,  `access_contact`)
+(`id`,  `login`, `uuid`,  `password`, `firstname`, `lastname`, `access_accounting`,  `access_contact`)
 VALUES
-(1, 'johndoe@woodytoys.seldric.be', 'password123',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'password123', 'Cedric', 'De Dryver', TRUE, TRUE);
+(1, 'johndoe@woodytoys.seldric.be', 'a6519ed0-42ac-11ee-be56-0242ac120002', 'password123',  'John', 'Doe', TRUE, FALSE), (2, 'cdd@woodytoys.seldric.be', 'c184c0d8-42ac-11ee-be56-0242ac120002', 'password123', 'Cedric', 'De Dryver', TRUE, TRUE);
 INSERT INTO `woodytoys`.`invoice`
 (`id`,  `name`,  `customer`, `date`, `amount`)
 VALUES

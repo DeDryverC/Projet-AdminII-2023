@@ -69,7 +69,7 @@
                     $prix = $_POST["price"];
                     $brand = $_POST["brand"];
 
-                    $insert = $mysqli->prepare("INSERT INTO articles VALUES (?, ?, ?, ?)");
+                    $insert = $conn->prepare("INSERT INTO articles VALUES (?, ?, ?, ?)");
                     $insert->bind_param("issd", $new_article_id, $article, $prix, $brand);
                     $insert->execute();
                     $insert->close();
