@@ -19,13 +19,13 @@
             header("Location: index.php");
             exit();
         }
+        $log_result->close();
+        $log_access->close();
     }
     if(isset($_POST["submit"])){
         header("Location: index.php");
         exit();
     }
-    $log_result->close();
-    $log_access->close();
 ?>
 <html>
     <head>
@@ -52,12 +52,13 @@
                         $row["access_accounting"],
                         $row["access_contact"]
                     );
+                $info_result->close();
+                $info_access->close();
                 } else {
                     printf('No user found. Please contact your administrator<br />');
                 }
             }
-            $info_result->close();
-            $info_access->close();
+
             $conn->close()
         ?>
         <div id="login_container">
