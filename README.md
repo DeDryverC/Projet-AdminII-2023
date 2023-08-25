@@ -7,6 +7,12 @@
 > - login: cdd@woodytoys.seldric.be
 > - password: rip_skybl0g
 
+## Les liens du projet:
+
+- Site vitrine : [www.woodytoys.seldric.be](www.woodytoys.seldric.be)
+- Site b2b : [www.b2b.seldric.be](www.b2b.seldric.be)
+- Site ERP / Intranet [www.erp.seldric.be](www.erp.seldric.be)
+
 ## Les commandes du projet.
 &nbsp;
 Il est impératif d'installer docker, ainsi que docker compose pour le bon fonctionnement de ce code.
